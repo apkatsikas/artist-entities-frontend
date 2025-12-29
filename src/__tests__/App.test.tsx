@@ -13,19 +13,11 @@ describe('App authenticated flow', () => {
       </AuthProvider>
     );
 
-    await userEvent.type(
-      screen.getByLabelText(/username/i),
-      'alice'
-    );
+    await userEvent.type(screen.getByLabelText(/username/i), 'alice');
 
-    await userEvent.type(
-      screen.getByLabelText(/password/i),
-      'password'
-    );
+    await userEvent.type(screen.getByLabelText(/password/i), 'password');
 
-    await userEvent.click(
-      screen.getByRole('button', { name: /log in/i })
-    );
+    await userEvent.click(screen.getByRole('button', { name: /log in/i }));
 
     const artistInput = await screen.findByLabelText(/enter artist/i);
     expect(artistInput).toBeInTheDocument();
@@ -34,13 +26,10 @@ describe('App authenticated flow', () => {
     await userEvent.click(
       screen.getByRole('button', { name: /create artist/i })
     );
-    const success = await screen.findByText(
-      /created artist: cool band/i
-    );
+    const success = await screen.findByText(/created artist: cool band/i);
     expect(success).toBeInTheDocument();
   });
 });
-
 
 describe('App login failure flow', () => {
   it('does not show artist entry form when login fails', async () => {
@@ -59,31 +48,19 @@ describe('App login failure flow', () => {
       </AuthProvider>
     );
 
-    await userEvent.type(
-      screen.getByLabelText(/username/i),
-      'baduser'
-    );
-    await userEvent.type(
-      screen.getByLabelText(/password/i),
-      'badpass'
-    );
+    await userEvent.type(screen.getByLabelText(/username/i), 'baduser');
+    await userEvent.type(screen.getByLabelText(/password/i), 'badpass');
 
-    await userEvent.click(
-      screen.getByRole('button', { name: /log in/i })
-    );
+    await userEvent.click(screen.getByRole('button', { name: /log in/i }));
 
-    const error = await screen.findByText(
-      /failed to authenticate/i
-    );
+    const error = await screen.findByText(/failed to authenticate/i);
     expect(error).toBeInTheDocument();
 
     expect(
       screen.queryByRole('button', { name: /create artist/i })
     ).not.toBeInTheDocument();
 
-    expect(
-      screen.getByRole('button', { name: /log in/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /log in/i })).toBeInTheDocument();
   });
 });
 
