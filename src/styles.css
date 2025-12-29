@@ -1,0 +1,63 @@
+#artist {
+  font-size: 175px;
+}
+
+.top-center {
+  margin: 0;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.btm-container {
+  position: absolute;
+  height: 20%;
+  top: 77%;
+  left: 33%;
+  margin: auto;
+}
+
+.top-btm-padding {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.horiz-center {
+  margin: auto;
+  text-align: center;
+}
+
+.ak-button {
+  font-size: 30px;
+}
+
+body {
+  background-color: black;
+}
+
+.white-text {
+  color: white;
+}
+
+.create-btn {
+  margin-top: 2%;
+  margin-left: 40%;
+}
+
+#result-output {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.error-msg {
+  color: red;
+  font-style: italic;
+}
+
+#result-output-get {
+  color: red;
+  margin-top: 2%;
+  text-align: center;
+}
