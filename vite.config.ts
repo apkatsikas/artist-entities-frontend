@@ -9,22 +9,6 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: './src/setupTests.ts',
   },
-  server: {
-    proxy: {
-      '/artist/random': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      },
-      '/login': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      },
-      '/artist': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      },
-    },
-  },
   base: './',
   build: {
     assetsDir: '.',
