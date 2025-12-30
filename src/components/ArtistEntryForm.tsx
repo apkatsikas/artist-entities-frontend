@@ -14,7 +14,9 @@ function ArtistEntryForm() {
   const [result, setResult] = useState<Result>(null);
   const { token } = useAuth();
 
-  const handleCreate = async () => {
+  const handleCreate = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
     if (!artist) {
       setResult({
         data: { Name: '', Message: 'Please enter an artist name' },
@@ -50,21 +52,25 @@ function ArtistEntryForm() {
   };
 
   return (
-    <div id="artist-entry-container" className="btm-container">
+    <form
+      id="artist-entry-container"
+      className="btm-container"
+      onSubmit={handleCreate}
+    >
       <div className="top-btm-padding">
         <label className="white-text" htmlFor="artist-entry">
           Enter artist:
         </label>
         <input
-          size={75}
           type="text"
           id="artist-entry"
           value={artist}
           onChange={(e) => setArtist(e.target.value)}
+          autoFocus
         />
       </div>
 
-      <button className="ak-button create-btn" onClick={handleCreate}>
+      <button className="ak-button create-btn" type="submit">
         Create Artist
       </button>
 
@@ -78,7 +84,7 @@ function ArtistEntryForm() {
             : `Failed to create artist: ${result.data.Message}`}
         </div>
       )}
-    </div>
+    </form>
   );
 }
 

@@ -39,12 +39,12 @@ function LoginForm() {
           Username:{' '}
         </label>
         <input
-          size={50}
           type="text"
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          autoFocus
         />
       </div>
       <div className="top-btm-padding">
@@ -52,7 +52,6 @@ function LoginForm() {
           Password:{' '}
         </label>
         <input
-          size={50}
           type="password"
           id="password"
           value={password}
