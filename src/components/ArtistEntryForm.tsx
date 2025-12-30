@@ -66,6 +66,7 @@ function ArtistEntryForm() {
           id="artist-entry"
           value={artist}
           onChange={(e) => setArtist(e.target.value)}
+          autoFocus
         />
       </div>
 

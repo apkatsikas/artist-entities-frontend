@@ -44,6 +44,7 @@ function LoginForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          autoFocus
         />
       </div>
       <div className="top-btm-padding">
