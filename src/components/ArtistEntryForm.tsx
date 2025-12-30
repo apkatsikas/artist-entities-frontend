@@ -56,7 +56,6 @@ function ArtistEntryForm() {
           Enter artist:
         </label>
         <input
-          size={75}
           type="text"
           id="artist-entry"
           value={artist}
