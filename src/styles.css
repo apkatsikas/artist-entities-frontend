@@ -122,6 +122,12 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.btm-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .top-center {
     gap: 1rem;
