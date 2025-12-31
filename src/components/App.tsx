@@ -7,10 +7,11 @@ import { useAuth } from '../authContext';
 const App: React.FC = () => {
   const { token } = useAuth();
   return (
-    <>
+    <main>
+      <h1>New Hell Artist Tracker</h1>
       <ArtistSection />
       <>{token ? <ArtistEntryForm /> : <LoginForm />}</>
-    </>
+    </main>
   );
 };
 
