@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { AuthContext } from '../../authContext';
+import { AuthContext } from '../../features/auth/hooks/authContext';
 
 export const MockAuthProvider = ({
   token = 'FAKE_JWT',

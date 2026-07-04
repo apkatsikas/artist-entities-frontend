@@ -3,14 +3,29 @@ import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
 
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../features/auth/components/LoginForm';
+import { useLoginViewModel } from '../features/auth/hooks/useLoginViewModel';
 import { MockAuthProvider } from './mocks/MockAuthProvider';
+
+function LoginFormWithViewModel() {
+  const vm = useLoginViewModel();
+  return (
+    <LoginForm
+      username={vm.username}
+      onUsernameChange={vm.setUsername}
+      password={vm.password}
+      onPasswordChange={vm.setPassword}
+      errorMessage={vm.errorMessage}
+      onSubmit={vm.handleLogin}
+    />
+  );
+}
 
 describe('LoginForm', () => {
   it('logs in successfully without showing error', async () => {
     render(
       <MockAuthProvider>
-        <LoginForm />
+        <LoginFormWithViewModel />
       </MockAuthProvider>
     );
 
@@ -35,7 +50,7 @@ describe('LoginForm', () => {
 
     render(
       <MockAuthProvider>
-        <LoginForm />
+        <LoginFormWithViewModel />
       </MockAuthProvider>
     );
 

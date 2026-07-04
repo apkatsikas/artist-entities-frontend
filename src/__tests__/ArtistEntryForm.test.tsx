@@ -1,15 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ArtistEntryForm from '../components/ArtistEntryForm';
+import ArtistEntryForm from '../features/artists/components/ArtistEntryForm';
+import { useArtistEntryViewModel } from '../features/artists/hooks/useArtistEntryViewModel';
 import { MockAuthProvider } from './mocks/MockAuthProvider';
 import { server } from '../mocks/server';
 import { http, HttpResponse } from 'msw';
+
+function ArtistEntryFormWithViewModel() {
+  const vm = useArtistEntryViewModel();
+  return (
+    <ArtistEntryForm
+      artistName={vm.artistName}
+      onArtistNameChange={vm.setArtistName}
+      displayMessage={vm.displayMessage}
+      isError={vm.isError}
+      onSubmit={vm.handleCreate}
+    />
+  );
+}
 
 describe('ArtistEntryForm', () => {
   it('submits a new artist and shows success message', async () => {
     render(
       <MockAuthProvider token="FAKE_JWT">
-        <ArtistEntryForm />
+        <ArtistEntryFormWithViewModel />
       </MockAuthProvider>
     );
 
@@ -35,7 +49,7 @@ describe('ArtistEntryForm', () => {
 
     render(
       <MockAuthProvider token="FAKE_JWT">
-        <ArtistEntryForm />
+        <ArtistEntryFormWithViewModel />
       </MockAuthProvider>
     );
 
@@ -52,7 +66,7 @@ describe('ArtistEntryForm', () => {
   it('shows error if artist name is empty', async () => {
     render(
       <MockAuthProvider token="FAKE_JWT">
-        <ArtistEntryForm />
+        <ArtistEntryFormWithViewModel />
       </MockAuthProvider>
     );
 
