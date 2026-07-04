@@ -7,12 +7,20 @@ type ArtistEntryResult =
   | { message: string; success: false }
   | null;
 
-export function useArtistEntryViewModel() {
+type ArtistEntryViewModel = {
+  artistName: string;
+  setArtistName: (value: string) => void;
+  displayMessage: string | null;
+  isError: boolean;
+  handleCreate: (e: React.FormEvent) => Promise<void>;
+};
+
+export function useArtistEntryViewModel(): ArtistEntryViewModel {
   const [artistName, setArtistName] = useState('');
   const [result, setResult] = useState<ArtistEntryResult>(null);
   const { token } = useAuth();
 
-  const handleCreate = async (e: React.FormEvent) => {
+  const handleCreate = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const name = await createArtist(artistName, token ?? '');

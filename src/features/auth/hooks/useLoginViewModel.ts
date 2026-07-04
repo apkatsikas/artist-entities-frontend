@@ -2,13 +2,22 @@ import React, { useState } from 'react';
 import { loginUser } from '../services/authService';
 import { useAuth } from './authContext';
 
-export function useLoginViewModel() {
+type LoginViewModel = {
+  username: string;
+  setUsername: (value: string) => void;
+  password: string;
+  setPassword: (value: string) => void;
+  errorMessage: string;
+  handleLogin: (e: React.FormEvent) => Promise<void>;
+};
+
+export function useLoginViewModel(): LoginViewModel {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { setToken } = useAuth();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const token = await loginUser(username, password);
@@ -21,5 +30,12 @@ export function useLoginViewModel() {
     }
   };
 
-  return { username, setUsername, password, setPassword, errorMessage, handleLogin };
+  return {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    errorMessage,
+    handleLogin,
+  };
 }

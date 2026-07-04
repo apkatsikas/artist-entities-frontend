@@ -1,4 +1,4 @@
-import React from 'react';
+import type { JSX, FormEvent } from 'react';
 
 type LoginFormProps = {
   username: string;
@@ -6,7 +6,7 @@ type LoginFormProps = {
   password: string;
   onPasswordChange: (value: string) => void;
   errorMessage: string;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e: FormEvent) => void;
 };
 
 function LoginForm({
@@ -16,7 +16,7 @@ function LoginForm({
   onPasswordChange,
   errorMessage,
   onSubmit,
-}: LoginFormProps) {
+}: LoginFormProps): JSX.Element {
   return (
     <form id="login-form" className="btm-container" onSubmit={onSubmit}>
       <div className="top-btm-padding">

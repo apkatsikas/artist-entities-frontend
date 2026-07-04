@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ArtistEntryForm from '../features/artists/components/ArtistEntryForm';
@@ -6,7 +7,7 @@ import { MockAuthProvider } from './mocks/MockAuthProvider';
 import { server } from '../mocks/server';
 import { http, HttpResponse } from 'msw';
 
-function ArtistEntryFormWithViewModel() {
+function ArtistEntryFormWithViewModel(): JSX.Element {
   const vm = useArtistEntryViewModel();
   return (
     <ArtistEntryForm

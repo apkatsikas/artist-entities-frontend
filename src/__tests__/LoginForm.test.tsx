@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
@@ -7,7 +8,7 @@ import LoginForm from '../features/auth/components/LoginForm';
 import { useLoginViewModel } from '../features/auth/hooks/useLoginViewModel';
 import { MockAuthProvider } from './mocks/MockAuthProvider';
 
-function LoginFormWithViewModel() {
+function LoginFormWithViewModel(): JSX.Element {
   const vm = useLoginViewModel();
   return (
     <LoginForm

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
@@ -6,7 +7,7 @@ import { server } from '../mocks/server';
 import ArtistSection from '../features/artists/components/ArtistSection';
 import { useArtistSectionViewModel } from '../features/artists/hooks/useArtistSectionViewModel';
 
-function ArtistSectionWithViewModel() {
+function ArtistSectionWithViewModel(): JSX.Element {
   const vm = useArtistSectionViewModel();
   return (
     <ArtistSection

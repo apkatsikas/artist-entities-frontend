@@ -1,11 +1,11 @@
-import React from 'react';
+import type { JSX, FormEvent } from 'react';
 
 type ArtistEntryFormProps = {
   artistName: string;
   onArtistNameChange: (value: string) => void;
   displayMessage: string | null;
   isError: boolean;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e: FormEvent) => void;
 };
 
 function ArtistEntryForm({
@@ -14,7 +14,7 @@ function ArtistEntryForm({
   displayMessage,
   isError,
   onSubmit,
-}: ArtistEntryFormProps) {
+}: ArtistEntryFormProps): JSX.Element {
   return (
     <form
       id="artist-entry-container"

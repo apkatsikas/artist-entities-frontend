@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { getRandomArtist } from '../services/artistService';
 
-export function useArtistSectionViewModel() {
+type ArtistSectionViewModel = {
+  artist: string;
+  errorMsg: string;
+  fetchArtist: () => Promise<void>;
+};
+
+export function useArtistSectionViewModel(): ArtistSectionViewModel {
   const [artist, setArtist] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const fetchArtist = async () => {
+  const fetchArtist = async (): Promise<void> => {
     try {
       const name = await getRandomArtist();
       setArtist(name);

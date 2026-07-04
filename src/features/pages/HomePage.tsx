@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import ArtistSection from '../artists/components/ArtistSection';
 import ArtistEntryForm from '../artists/components/ArtistEntryForm';
 import LoginForm from '../auth/components/LoginForm';
@@ -6,7 +7,7 @@ import { useArtistEntryViewModel } from '../artists/hooks/useArtistEntryViewMode
 import { useLoginViewModel } from '../auth/hooks/useLoginViewModel';
 import { useAuth } from '../auth/hooks/authContext';
 
-function HomePage() {
+function HomePage(): JSX.Element {
   const { token } = useAuth();
   const artistSectionVM = useArtistSectionViewModel();
   const artistEntryVM = useArtistEntryViewModel();

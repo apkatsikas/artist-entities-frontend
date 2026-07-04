@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import ArtistButton from './ArtistButton';
 import ArtistDisplay from './ArtistDisplay';
 
@@ -7,7 +8,11 @@ type ArtistSectionProps = {
   onFetchArtist: () => Promise<void>;
 };
 
-function ArtistSection({ artist, errorMsg, onFetchArtist }: ArtistSectionProps) {
+function ArtistSection({
+  artist,
+  errorMsg,
+  onFetchArtist,
+}: ArtistSectionProps): JSX.Element {
   return (
     <>
       <div className="container">

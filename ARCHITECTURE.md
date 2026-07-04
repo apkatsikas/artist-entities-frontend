@@ -30,6 +30,7 @@ src/
 Each layer has a strict contract. Violating these keeps concerns mixed and makes code hard to test or reuse.
 
 ### API (`api/`)
+
 - Only HTTP calls (`fetch`)
 - No business logic
 - No state
@@ -37,6 +38,7 @@ Each layer has a strict contract. Violating these keeps concerns mixed and makes
 - Returns raw `Response` objects
 
 ### Service (`services/`)
+
 - Business logic and validation only
 - Calls the API layer
 - Parses API responses and maps errors to thrown `Error` objects
@@ -44,6 +46,7 @@ Each layer has a strict contract. Violating these keeps concerns mixed and makes
 - No React code (no hooks, no JSX)
 
 ### ViewModel (`hooks/`)
+
 - Manages component state (`useState`, `useEffect`)
 - Calls the service layer — never the API layer directly
 - Returns clean data and handler functions to the view
@@ -51,6 +54,7 @@ Each layer has a strict contract. Violating these keeps concerns mixed and makes
 - Named with the `use` prefix per React hook convention
 
 ### View (`components/`)
+
 - Only JSX and styling
 - No API calls
 - No business logic
@@ -58,6 +62,7 @@ Each layer has a strict contract. Violating these keeps concerns mixed and makes
 - May import types from its corresponding ViewModel
 
 ### Page (`pages/`)
+
 - Composition only
 - Calls ViewModel hooks and passes their output as props to View components
 - Handles conditional rendering based on app state (e.g. auth)
