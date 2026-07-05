@@ -1,20 +1,13 @@
 import type { JSX } from 'react';
+import { Typography } from '@mui/material';
+import { sxPresets } from '../../shared/constants/theme';
 
 type ArtistDisplayProps = {
   artist: string | null;
 };
 
 function ArtistDisplay({ artist }: ArtistDisplayProps): JSX.Element {
-  return (
-    <div
-      className="artist-display"
-      style={{
-        minHeight: 'clamp(3rem, 25vw, 15rem)',
-      }}
-    >
-      {artist}
-    </div>
-  );
+  return <Typography sx={sxPresets.artistDisplay}>{artist}</Typography>;
 }
 
 export default ArtistDisplay;

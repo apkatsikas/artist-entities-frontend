@@ -1,4 +1,5 @@
 import type { JSX } from 'react';
+import { Button } from '@mui/material';
 
 type ArtistButtonProps = {
   onClick: () => Promise<void>;
@@ -6,11 +7,9 @@ type ArtistButtonProps = {
 
 function ArtistButton({ onClick }: ArtistButtonProps): JSX.Element {
   return (
-    <div>
-      <button className="ak-button" onClick={onClick}>
-        Random Artist
-      </button>
-    </div>
+    <Button variant="contained" onClick={onClick}>
+      Random Artist
+    </Button>
   );
 }
 
