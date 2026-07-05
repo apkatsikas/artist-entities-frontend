@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from '../components/App';
-import { AuthProvider } from '../components/AuthProvider';
+import HomePage from '../features/pages/HomePage';
+import { AuthProvider } from '../features/auth/components/AuthProvider';
 import { server } from '../mocks/server';
 import { http, HttpResponse } from 'msw';
 
@@ -9,7 +9,7 @@ describe('App authenticated flow', () => {
   it('allows user to login and create an artist', async () => {
     render(
       <AuthProvider>
-        <App />
+        <HomePage />
       </AuthProvider>
     );
 
@@ -34,7 +34,7 @@ describe('App authenticated flow', () => {
 describe('App login failure flow', () => {
   it('does not show artist entry form when login fails', async () => {
     server.use(
-      http.post('/login', async () => {
+      http.post('/login', () => {
         return HttpResponse.json(
           { Message: 'Invalid credentials' },
           { status: 401 }
@@ -44,7 +44,7 @@ describe('App login failure flow', () => {
 
     render(
       <AuthProvider>
-        <App />
+        <HomePage />
       </AuthProvider>
     );
 
@@ -68,7 +68,7 @@ describe('App random artist flow', () => {
   it('fetches and displays a random artist', async () => {
     render(
       <AuthProvider>
-        <App />
+        <HomePage />
       </AuthProvider>
     );
 

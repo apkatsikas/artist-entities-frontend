@@ -17,12 +17,24 @@ export default defineConfig(
         reactHooks.configs.flat.recommended,
         reactRefresh.configs.vite,
       ],
-      rules: {},
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': [
+          'error',
+          { allowExpressions: true },
+        ],
+        'require-await': 'error',
+      },
       languageOptions: {
         ecmaVersion: 2020,
         globals: globals.browser,
       },
     },
   ],
-  eslintConfigPrettier
+  eslintConfigPrettier,
+  // curly must come after eslintConfigPrettier — prettier disables it, we want it back
+  {
+    rules: {
+      curly: ['error', 'all'],
+    },
+  }
 );

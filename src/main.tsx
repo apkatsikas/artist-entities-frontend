@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles.css';
-import App from './components/App';
-import { AuthProvider } from './components/AuthProvider';
+import HomePage from './features/pages/HomePage';
+import { AuthProvider } from './features/auth/components/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <HomePage />
     </AuthProvider>
   </React.StrictMode>
 );

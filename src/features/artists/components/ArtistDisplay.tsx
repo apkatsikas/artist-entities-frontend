@@ -1,8 +1,10 @@
+import type { JSX } from 'react';
+
 type ArtistDisplayProps = {
   artist: string | null;
 };
 
-function ArtistDisplay({ artist }: ArtistDisplayProps) {
+function ArtistDisplay({ artist }: ArtistDisplayProps): JSX.Element {
   return (
     <div
       className="horiz-center white-text"

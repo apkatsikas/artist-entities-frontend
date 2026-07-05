@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { AuthContext } from '../../authContext';
+import type { JSX, ReactNode } from 'react';
+import { AuthContext } from '../../features/auth/hooks/authContext';
 
 export const MockAuthProvider = ({
   token = 'FAKE_JWT',
@@ -7,7 +7,7 @@ export const MockAuthProvider = ({
 }: {
   token?: string;
   children: ReactNode;
-}) => {
+}): JSX.Element => {
   return (
     <AuthContext.Provider value={{ token, setToken: () => {} }}>
       {children}

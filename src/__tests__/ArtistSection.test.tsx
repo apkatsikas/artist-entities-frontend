@@ -1,13 +1,26 @@
+import type { JSX } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
 
-import ArtistSection from '../components/ArtistSection';
+import ArtistSection from '../features/artists/components/ArtistSection';
+import { useArtistSectionViewModel } from '../features/artists/hooks/useArtistSectionViewModel';
+
+function ArtistSectionWithViewModel(): JSX.Element {
+  const vm = useArtistSectionViewModel();
+  return (
+    <ArtistSection
+      artist={vm.artist}
+      errorMsg={vm.errorMsg}
+      onFetchArtist={vm.fetchArtist}
+    />
+  );
+}
 
 describe('ArtistSection', () => {
   it('fetches and displays a random artist on success', async () => {
-    render(<ArtistSection />);
+    render(<ArtistSectionWithViewModel />);
 
     await userEvent.click(
       screen.getByRole('button', { name: /random artist/i })
@@ -23,7 +36,7 @@ describe('ArtistSection', () => {
       })
     );
 
-    render(<ArtistSection />);
+    render(<ArtistSectionWithViewModel />);
 
     await userEvent.click(
       screen.getByRole('button', { name: /random artist/i })

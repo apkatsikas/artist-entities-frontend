@@ -1,8 +1,10 @@
+import type { JSX } from 'react';
+
 type ArtistButtonProps = {
   onClick: () => Promise<void>;
 };
 
-function ArtistButton({ onClick }: ArtistButtonProps) {
+function ArtistButton({ onClick }: ArtistButtonProps): JSX.Element {
   return (
     <div>
       <button className="ak-button" onClick={onClick}>
