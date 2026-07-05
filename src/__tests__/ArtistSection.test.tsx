@@ -3,9 +3,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ArtistSection from '../features/artists/components/ArtistSection';
 import { useArtistSectionViewModel } from '../features/artists/hooks/useArtistSectionViewModel';
+
+function createTestQueryClient(): QueryClient {
+  return new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+}
 
 function ArtistSectionWithViewModel(): JSX.Element {
   const vm = useArtistSectionViewModel();
@@ -13,6 +20,7 @@ function ArtistSectionWithViewModel(): JSX.Element {
     <ArtistSection
       artist={vm.artist}
       errorMsg={vm.errorMsg}
+      isPending={vm.isPending}
       onFetchArtist={vm.fetchArtist}
     />
   );
@@ -20,7 +28,11 @@ function ArtistSectionWithViewModel(): JSX.Element {
 
 describe('ArtistSection', () => {
   it('fetches and displays a random artist on success', async () => {
-    render(<ArtistSectionWithViewModel />);
+    render(
+      <QueryClientProvider client={createTestQueryClient()}>
+        <ArtistSectionWithViewModel />
+      </QueryClientProvider>
+    );
 
     await userEvent.click(
       screen.getByRole('button', { name: /random artist/i })
@@ -36,7 +48,11 @@ describe('ArtistSection', () => {
       })
     );
 
-    render(<ArtistSectionWithViewModel />);
+    render(
+      <QueryClientProvider client={createTestQueryClient()}>
+        <ArtistSectionWithViewModel />
+      </QueryClientProvider>
+    );
 
     await userEvent.click(
       screen.getByRole('button', { name: /random artist/i })

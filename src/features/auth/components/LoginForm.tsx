@@ -8,6 +8,7 @@ type LoginFormProps = {
   password: string;
   onPasswordChange: (value: string) => void;
   errorMessage: string;
+  isPending: boolean;
   onSubmit: (e: FormEvent) => void;
 };
 
@@ -17,6 +18,7 @@ function LoginForm({
   password,
   onPasswordChange,
   errorMessage,
+  isPending,
   onSubmit,
 }: LoginFormProps): JSX.Element {
   return (
@@ -37,7 +39,7 @@ function LoginForm({
         required
         fullWidth
       />
-      <Button variant="contained" type="submit" fullWidth>
+      <Button variant="contained" type="submit" fullWidth disabled={isPending}>
         Log In
       </Button>
       {errorMessage && <Typography color="error">{errorMessage}</Typography>}

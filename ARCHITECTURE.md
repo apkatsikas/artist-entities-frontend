@@ -99,5 +99,4 @@ This mirrors how the Page composes them and keeps tests realistic without needin
 
 ## TODO
 
-- [ ] Add **TanStack Query** (`@tanstack/react-query`) for server state — caching, background refetching, loading/error states, and deduplication of requests. Would live in the hooks layer, replacing the manual `useState` + `try/catch` fetch patterns in ViewModels like `useArtistSectionViewModel`.
 - [ ] Add **Zustand** for shared state that needs to be accessed across multiple features (e.g. a notification system, cross-feature artist selection). Currently `AuthContext` is the only shared state and uses React Context, which is fine for auth. Zustand becomes the right tool when multiple features need to read/write the same state without prop drilling or deeply nested providers.

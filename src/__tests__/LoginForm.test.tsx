@@ -17,6 +17,7 @@ function LoginFormWithViewModel(): JSX.Element {
       password={vm.password}
       onPasswordChange={vm.setPassword}
       errorMessage={vm.errorMessage}
+      isPending={vm.isPending}
       onSubmit={vm.handleLogin}
     />
   );

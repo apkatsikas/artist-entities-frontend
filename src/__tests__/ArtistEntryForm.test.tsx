@@ -15,6 +15,7 @@ function ArtistEntryFormWithViewModel(): JSX.Element {
       onArtistNameChange={vm.setArtistName}
       displayMessage={vm.displayMessage}
       isError={vm.isError}
+      isPending={vm.isPending}
       onSubmit={vm.handleCreate}
     />
   );

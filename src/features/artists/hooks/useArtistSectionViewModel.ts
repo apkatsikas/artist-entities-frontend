@@ -1,28 +1,22 @@
-import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { getRandomArtist } from '../services/artistService';
 
 type ArtistSectionViewModel = {
   artist: string;
   errorMsg: string;
-  fetchArtist: () => Promise<void>;
+  isPending: boolean;
+  fetchArtist: () => void;
 };
 
 export function useArtistSectionViewModel(): ArtistSectionViewModel {
-  const [artist, setArtist] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+  const { mutate, data, error, isPending } = useMutation({
+    mutationFn: getRandomArtist,
+  });
 
-  const fetchArtist = async (): Promise<void> => {
-    try {
-      const name = await getRandomArtist();
-      setArtist(name);
-      setErrorMsg('');
-    } catch (error) {
-      setErrorMsg(
-        'Failed to get random artist ' +
-          (error instanceof Error ? error.message : String(error))
-      );
-    }
-  };
+  const artist = data ?? '';
+  const errorMsg = error
+    ? `Failed to get random artist ${error instanceof Error ? error.message : String(error)}`
+    : '';
 
-  return { artist, errorMsg, fetchArtist };
+  return { artist, errorMsg, isPending, fetchArtist: mutate };
 }

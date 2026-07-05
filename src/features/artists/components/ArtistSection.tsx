@@ -7,18 +7,20 @@ import { sxPresets } from '../../shared/constants/theme';
 type ArtistSectionProps = {
   artist: string;
   errorMsg: string;
-  onFetchArtist: () => Promise<void>;
+  isPending: boolean;
+  onFetchArtist: () => void;
 };
 
 function ArtistSection({
   artist,
   errorMsg,
+  isPending,
   onFetchArtist,
 }: ArtistSectionProps): JSX.Element {
   return (
     <>
       <Box sx={sxPresets.sectionLayout}>
-        <ArtistButton onClick={onFetchArtist} />
+        <ArtistButton onClick={onFetchArtist} disabled={isPending} />
         {errorMsg && (
           <Typography color="error" sx={sxPresets.sectionError}>
             {errorMsg}

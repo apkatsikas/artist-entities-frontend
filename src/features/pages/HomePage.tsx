@@ -22,6 +22,7 @@ function HomePage(): JSX.Element {
       <ArtistSection
         artist={artistSectionVM.artist}
         errorMsg={artistSectionVM.errorMsg}
+        isPending={artistSectionVM.isPending}
         onFetchArtist={artistSectionVM.fetchArtist}
       />
       {token ? (
@@ -30,6 +31,7 @@ function HomePage(): JSX.Element {
           onArtistNameChange={artistEntryVM.setArtistName}
           displayMessage={artistEntryVM.displayMessage}
           isError={artistEntryVM.isError}
+          isPending={artistEntryVM.isPending}
           onSubmit={artistEntryVM.handleCreate}
         />
       ) : (
@@ -39,6 +41,7 @@ function HomePage(): JSX.Element {
           password={loginVM.password}
           onPasswordChange={loginVM.setPassword}
           errorMessage={loginVM.errorMessage}
+          isPending={loginVM.isPending}
           onSubmit={loginVM.handleLogin}
         />
       )}

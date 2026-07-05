@@ -8,6 +8,7 @@ type ArtistEntryFormProps = {
   onArtistNameChange: (value: string) => void;
   displayMessage: string | null;
   isError: boolean;
+  isPending: boolean;
   onSubmit: (e: FormEvent) => void;
 };
 
@@ -16,6 +17,7 @@ function ArtistEntryForm({
   onArtistNameChange,
   displayMessage,
   isError,
+  isPending,
   onSubmit,
 }: ArtistEntryFormProps): JSX.Element {
   return (
@@ -27,7 +29,7 @@ function ArtistEntryForm({
         autoFocus
         fullWidth
       />
-      <Button variant="contained" type="submit" fullWidth>
+      <Button variant="contained" type="submit" fullWidth disabled={isPending}>
         Create Artist
       </Button>
       {displayMessage && (
