@@ -18,9 +18,9 @@ src/
 │   │   ├── hooks/        # Includes authContext.ts (context + useAuth hook)
 │   │   └── components/   # Includes AuthProvider.tsx
 │   ├── shared/
-│   │   ├── components/   # Reusable UI components
+│   │   ├── components/   # Reusable UI components (e.g. FormContainer)
 │   │   ├── utils/        # Pure utility functions
-│   │   └── constants/    # App-wide constants
+│   │   └── constants/    # App-wide constants (theme, sxPresets)
 │   └── pages/            # Page components — composition only
 └── mocks/                # MSW handlers for testing
 ```
@@ -47,15 +47,16 @@ Each layer has a strict contract. Violating these keeps concerns mixed and makes
 
 ### ViewModel (`hooks/`)
 
-- Manages component state (`useState`, `useEffect`)
+- Manages async server state via **TanStack Query** (`useMutation`, `useQuery`)
 - Calls the service layer — never the API layer directly
-- Returns clean data and handler functions to the view
+- Returns clean data and handler functions to the view, including `isPending` for loading state
 - No JSX
 - Named with the `use` prefix per React hook convention
 
 ### View (`components/`)
 
-- Only JSX and styling
+- Only JSX and styling via **MUI** (`Box`, `Typography`, `Button`, `TextField`, etc.)
+- Shared style tokens live in `shared/constants/theme.ts` (`sxPresets`) — no inline magic numbers
 - No API calls
 - No business logic
 - Receives everything through props
@@ -75,7 +76,7 @@ User action
     ↓
 View (component) — calls handler from props
     ↓
-ViewModel (hook) — calls service, updates state
+ViewModel (hook) — calls service via TanStack Query mutation, exposes data/error/isPending
     ↓
 Service — validates, calls API, maps response
     ↓
@@ -96,6 +97,8 @@ function ArtistSectionWithViewModel() {
 ```
 
 This mirrors how the Page composes them and keeps tests realistic without needing to manually construct props.
+
+Tests that use ViewModels must be wrapped with `QueryClientProvider` (and a fresh `QueryClient` with `retry: false` to prevent retries from hanging tests). The `MockAuthProvider` in `src/__tests__/mocks/` includes this automatically.
 
 ## TODO
 
