@@ -1,4 +1,6 @@
 import type { JSX, FormEvent } from 'react';
+import { Button, TextField, Typography } from '@mui/material';
+import FormContainer from '../../shared/components/FormContainer';
 
 type LoginFormProps = {
   username: string;
@@ -18,35 +20,28 @@ function LoginForm({
   onSubmit,
 }: LoginFormProps): JSX.Element {
   return (
-    <form className="btm-container" onSubmit={onSubmit}>
-      <div className="top-btm-padding">
-        <label className="white-text">
-          Username:{' '}
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => onUsernameChange(e.target.value)}
-            required
-            autoFocus
-          />
-        </label>
-      </div>
-      <div className="top-btm-padding">
-        <label className="white-text">
-          Password:{' '}
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => onPasswordChange(e.target.value)}
-            required
-          />
-        </label>
-      </div>
-      <button className="ak-button create-btn" type="submit">
+    <FormContainer onSubmit={onSubmit}>
+      <TextField
+        label="Username"
+        value={username}
+        onChange={(e) => onUsernameChange(e.target.value)}
+        required
+        autoFocus
+        fullWidth
+      />
+      <TextField
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => onPasswordChange(e.target.value)}
+        required
+        fullWidth
+      />
+      <Button variant="contained" type="submit" fullWidth>
         Log In
-      </button>
-      <div className="error-msg">{errorMessage}</div>
-    </form>
+      </Button>
+      {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+    </FormContainer>
   );
 }
 

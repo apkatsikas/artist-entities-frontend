@@ -1,4 +1,7 @@
 import type { JSX, FormEvent } from 'react';
+import { Button, TextField, Typography } from '@mui/material';
+import FormContainer from '../../shared/components/FormContainer';
+import { sxPresets } from '../../shared/constants/theme';
 
 type ArtistEntryFormProps = {
   artistName: string;
@@ -16,31 +19,26 @@ function ArtistEntryForm({
   onSubmit,
 }: ArtistEntryFormProps): JSX.Element {
   return (
-    <form className="btm-container" onSubmit={onSubmit}>
-      <div className="top-btm-padding">
-        <label className="white-text">
-          Enter artist:
-          <input
-            type="text"
-            value={artistName}
-            onChange={(e) => onArtistNameChange(e.target.value)}
-            autoFocus
-          />
-        </label>
-      </div>
-
-      <button className="ak-button create-btn" type="submit">
+    <FormContainer onSubmit={onSubmit}>
+      <TextField
+        label="Enter artist"
+        value={artistName}
+        onChange={(e) => onArtistNameChange(e.target.value)}
+        autoFocus
+        fullWidth
+      />
+      <Button variant="contained" type="submit" fullWidth>
         Create Artist
-      </button>
-
+      </Button>
       {displayMessage && (
-        <div
-          className={`result-output ${isError ? 'error-msg' : 'white-text'}`}
+        <Typography
+          color={isError ? 'error' : 'inherit'}
+          sx={sxPresets.formFeedback}
         >
           {displayMessage}
-        </div>
+        </Typography>
       )}
-    </form>
+    </FormContainer>
   );
 }
 

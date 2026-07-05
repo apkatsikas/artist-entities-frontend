@@ -1,4 +1,5 @@
 import type { JSX } from 'react';
+import { Box, Typography } from '@mui/material';
 import ArtistSection from '../artists/components/ArtistSection';
 import ArtistEntryForm from '../artists/components/ArtistEntryForm';
 import LoginForm from '../auth/components/LoginForm';
@@ -14,8 +15,10 @@ function HomePage(): JSX.Element {
   const loginVM = useLoginViewModel();
 
   return (
-    <main>
-      <h1>New Hell Artist Tracker</h1>
+    <Box component="main">
+      <Typography variant="h4" sx={{ textAlign: 'center', pt: '1%' }}>
+        New Hell Artist Tracker
+      </Typography>
       <ArtistSection
         artist={artistSectionVM.artist}
         errorMsg={artistSectionVM.errorMsg}
@@ -39,7 +42,7 @@ function HomePage(): JSX.Element {
           onSubmit={loginVM.handleLogin}
         />
       )}
-    </main>
+    </Box>
   );
 }
 
