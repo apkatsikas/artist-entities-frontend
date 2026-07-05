@@ -1,16 +1,32 @@
+import type { JSX, ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import HomePage from '../features/pages/HomePage';
 import { AuthProvider } from '../features/auth/components/AuthProvider';
 import { server } from '../mocks/server';
 import { http, HttpResponse } from 'msw';
 
+function createTestQueryClient(): QueryClient {
+  return new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+}
+
+function AppWrapper({ children }: { children: ReactNode }): JSX.Element {
+  return (
+    <QueryClientProvider client={createTestQueryClient()}>
+      <AuthProvider>{children}</AuthProvider>
+    </QueryClientProvider>
+  );
+}
+
 describe('App authenticated flow', () => {
   it('allows user to login and create an artist', async () => {
     render(
-      <AuthProvider>
+      <AppWrapper>
         <HomePage />
-      </AuthProvider>
+      </AppWrapper>
     );
 
     await userEvent.type(screen.getByLabelText(/username/i), 'alice');
@@ -43,9 +59,9 @@ describe('App login failure flow', () => {
     );
 
     render(
-      <AuthProvider>
+      <AppWrapper>
         <HomePage />
-      </AuthProvider>
+      </AppWrapper>
     );
 
     await userEvent.type(screen.getByLabelText(/username/i), 'baduser');
@@ -67,9 +83,9 @@ describe('App login failure flow', () => {
 describe('App random artist flow', () => {
   it('fetches and displays a random artist', async () => {
     render(
-      <AuthProvider>
+      <AppWrapper>
         <HomePage />
-      </AuthProvider>
+      </AppWrapper>
     );
 
     await userEvent.click(

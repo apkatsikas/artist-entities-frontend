@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { loginUser } from '../services/authService';
 import { useAuth } from './authContext';
 
@@ -8,26 +9,27 @@ type LoginViewModel = {
   password: string;
   setPassword: (value: string) => void;
   errorMessage: string;
-  handleLogin: (e: React.FormEvent) => Promise<void>;
+  isPending: boolean;
+  handleLogin: (e: React.FormEvent) => void;
 };
 
 export function useLoginViewModel(): LoginViewModel {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const { setToken } = useAuth();
 
-  const handleLogin = async (e: React.FormEvent): Promise<void> => {
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: () => loginUser(username, password),
+    onSuccess: (token) => setToken(token),
+  });
+
+  const errorMessage = error
+    ? `Failed to authenticate: ${error instanceof Error ? error.message : String(error)}`
+    : '';
+
+  const handleLogin = (e: React.FormEvent): void => {
     e.preventDefault();
-    try {
-      const token = await loginUser(username, password);
-      setToken(token);
-    } catch (error) {
-      setErrorMessage(
-        'Failed to authenticate: ' +
-          (error instanceof Error ? error.message : String(error))
-      );
-    }
+    mutate();
   };
 
   return {
@@ -36,6 +38,7 @@ export function useLoginViewModel(): LoginViewModel {
     password,
     setPassword,
     errorMessage,
+    isPending,
     handleLogin,
   };
 }
