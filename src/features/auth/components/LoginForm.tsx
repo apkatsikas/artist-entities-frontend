@@ -18,38 +18,34 @@ function LoginForm({
   onSubmit,
 }: LoginFormProps): JSX.Element {
   return (
-    <form id="login-form" className="btm-container" onSubmit={onSubmit}>
+    <form className="btm-container" onSubmit={onSubmit}>
       <div className="top-btm-padding">
-        <label className="white-text" htmlFor="username">
+        <label className="white-text">
           Username:{' '}
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => onUsernameChange(e.target.value)}
+            required
+            autoFocus
+          />
         </label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => onUsernameChange(e.target.value)}
-          required
-          autoFocus
-        />
       </div>
       <div className="top-btm-padding">
-        <label className="white-text" htmlFor="password">
+        <label className="white-text">
           Password:{' '}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => onPasswordChange(e.target.value)}
+            required
+          />
         </label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => onPasswordChange(e.target.value)}
-          required
-        />
       </div>
       <button className="ak-button create-btn" type="submit">
         Log In
       </button>
-      <div id="secret-result-output" className="error-msg">
-        {errorMessage}
-      </div>
+      <div className="error-msg">{errorMessage}</div>
     </form>
   );
 }

@@ -16,22 +16,17 @@ function ArtistEntryForm({
   onSubmit,
 }: ArtistEntryFormProps): JSX.Element {
   return (
-    <form
-      id="artist-entry-container"
-      className="btm-container"
-      onSubmit={onSubmit}
-    >
+    <form className="btm-container" onSubmit={onSubmit}>
       <div className="top-btm-padding">
-        <label className="white-text" htmlFor="artist-entry">
+        <label className="white-text">
           Enter artist:
+          <input
+            type="text"
+            value={artistName}
+            onChange={(e) => onArtistNameChange(e.target.value)}
+            autoFocus
+          />
         </label>
-        <input
-          type="text"
-          id="artist-entry"
-          value={artistName}
-          onChange={(e) => onArtistNameChange(e.target.value)}
-          autoFocus
-        />
       </div>
 
       <button className="ak-button create-btn" type="submit">
@@ -39,10 +34,7 @@ function ArtistEntryForm({
       </button>
 
       {displayMessage && (
-        <div
-          id="result-output"
-          className={isError ? 'error-msg' : 'white-text'}
-        >
+        <div className={isError ? 'error-msg' : 'white-text'}>
           {displayMessage}
         </div>
       )}
