@@ -18,7 +18,7 @@ function ArtistSection({
       <div className="container">
         <div className="top-center">
           <ArtistButton onClick={onFetchArtist} />
-          <div>{errorMsg}</div>
+          <div className="error-msg">{errorMsg}</div>
         </div>
       </div>
       <ArtistDisplay artist={artist} />

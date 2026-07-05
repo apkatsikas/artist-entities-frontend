@@ -34,7 +34,9 @@ function ArtistEntryForm({
       </button>
 
       {displayMessage && (
-        <div className={isError ? 'error-msg' : 'white-text'}>
+        <div
+          className={`result-output ${isError ? 'error-msg' : 'white-text'}`}
+        >
           {displayMessage}
         </div>
       )}
