@@ -22,6 +22,7 @@ export default defineConfig(
           'error',
           { allowExpressions: true },
         ],
+        'require-await': 'error',
       },
       languageOptions: {
         ecmaVersion: 2020,

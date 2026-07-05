@@ -5,7 +5,7 @@ type LoginPayload = {
   password: string;
 };
 
-export async function loginRequest(payload: LoginPayload): Promise<Response> {
+export function loginRequest(payload: LoginPayload): Promise<Response> {
   return fetch(`${API_BASE}/login`, {
     method: 'POST',
     headers: {

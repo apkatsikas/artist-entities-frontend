@@ -41,7 +41,7 @@ describe('LoginForm', () => {
 
   it('shows error message on authentication failure', async () => {
     server.use(
-      http.post('/login', async () => {
+      http.post('/login', () => {
         return HttpResponse.json(
           { Message: 'Invalid credentials' },
           { status: 401 }

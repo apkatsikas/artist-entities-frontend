@@ -34,7 +34,7 @@ describe('App authenticated flow', () => {
 describe('App login failure flow', () => {
   it('does not show artist entry form when login fails', async () => {
     server.use(
-      http.post('/login', async () => {
+      http.post('/login', () => {
         return HttpResponse.json(
           { Message: 'Invalid credentials' },
           { status: 401 }

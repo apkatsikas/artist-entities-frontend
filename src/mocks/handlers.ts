@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  http.post('/login', async () => {
+  http.post('/login', () => {
     return HttpResponse.json('FAKE_JWT_TOKEN', { status: 200 });
   }),
 
